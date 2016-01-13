@@ -31,11 +31,9 @@ class useraction {
 		rearr ( $array );
 	}
 }
-if (! empty ( $_GET ["func"] )) {
-	$func = $_GET ["func"];
-} else {
-	$func = 'default';
-}
+$func = $_SERVER ['PATH_INFO'];
+$arr = explode ( "/", $func );
+$func = $arr [1];
 $ua = new useraction ();
 if (! empty ( $_GET ["id"] )) {
 	$id = $_GET ["id"];
