@@ -80,8 +80,8 @@ switch ($func) {
 		break;
 }
 // echo file_get_contents ( "php://input" );
-$json_string = file_get_contents ( "php://input" );
-$d = new Data ();
-$d = json_decode ( $json_string );
-$arr = $d->data;
+// $json_string = file_get_contents ( "php://input" );
+// $d = new Data ();
+// $d = json_decode ( $json_string );
+// $arr = $d->data;
 ?>
