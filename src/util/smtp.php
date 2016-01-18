@@ -32,7 +32,7 @@ class smtp {
 	function sendmail($to, $from, $subject = "", $body = "", $mailtype, $cc = "", $bcc = "", $additional_headers = "") {
 		$mail_from = $this->get_address ( $this->strip_comment ( $from ) );
 		$body = ereg_replace ( "(^|(\r\n))(\.)", "\1.\3", $body );
-		$header .= "MIME-Version:1.0\r\n";
+		$header = "MIME-Version:1.0\r\n";
 		if ($mailtype == "HTML") {
 			$header .= "Content-Type:text/html\r\n";
 		}
@@ -216,7 +216,7 @@ class smtp {
 	}
 	function smtp_debug($message) {
 		if ($this->debug) {
-			echo $message;
+			// echo $message;
 		}
 	}
 }
