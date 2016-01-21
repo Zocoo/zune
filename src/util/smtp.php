@@ -216,7 +216,7 @@ class smtp {
 	}
 	function smtp_debug($message) {
 		if ($this->debug) {
-			// echo $message;
+			echo $message;
 		}
 	}
 }
