@@ -3,39 +3,30 @@ include '../pojo/user.php';
 class userdao {
 	function add($u) {
 		include '../config/dbconf.php';
-		$conn = mysql_connect ( $mysql_server_name, $mysql_username, $mysql_password );
-		mysql_select_db ( $mysql_database );
-		mysql_query ( "SET NAMES 'UTF8'" );
-		$query = "insert into `user` (`name`,`age`,`address`,`sex`) values ('" . $u->getName () . "'," . $u->getAge () . ",'" . $u->getAddress () . "','" . $u->getSex () . "')";
-		$result = mysql_query ( $query, $conn );
-		mysql_close ();
-		return $result;
-		mysql_free_result ( $result );
+		$pdo = new PDO ( 'mysql:host=' . $mysql_server_name . ';port=' . $mysql_port . ';dbname=' . $mysql_database, $mysql_username, $mysql_password, array (
+				PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8" 
+		) );
+		$res = $pdo->exec ( "insert into `user` (`name`,`age`,`address`,`sex`) values ('" . $u->getName () . "'," . $u->getAge () . ",'" . $u->getAddress () . "','" . $u->getSex () . "')" );
+		return $res;
 	}
 	function delete($id) {
 		include '../config/dbconf.php';
-		$conn = mysql_connect ( $mysql_server_name, $mysql_username, $mysql_password );
-		mysql_select_db ( $mysql_database );
-		mysql_query ( "SET NAMES 'UTF8'" );
-		$query = "delete from `user` where id=" . $id;
-		$result = mysql_query ( $query, $conn );
-		mysql_close ();
-		return $result;
-		mysql_free_result ( $result );
+		$pdo = new PDO ( 'mysql:host=' . $mysql_server_name . ';port=' . $mysql_port . ';dbname=' . $mysql_database, $mysql_username, $mysql_password, array (
+				PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8" 
+		) );
+		$res = $pdo->exec ( "delete from `user` where id=" . $id );
+		return $res;
 	}
 	function select() {
 		include '../config/dbconf.php';
-		$conn = mysql_connect ( $mysql_server_name, $mysql_username, $mysql_password );
-		mysql_select_db ( $mysql_database );
-		mysql_query ( "SET NAMES 'UTF8'" );
-		$query = "select * from user";
-		$result = mysql_query ( $query, $conn );
+		$pdo = new PDO ( 'mysql:host=' . $mysql_server_name . ';port=' . $mysql_port . ';dbname=' . $mysql_database, $mysql_username, $mysql_password, array (
+				PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8" 
+		) );
+		$rs = $pdo->query ( "select * from user" );
 		$array = array ();
-		while ( $row = mysql_fetch_row ( $result ) ) {
+		while ( $row = $rs->fetch () ) {
 			$array [] = $row;
 		}
-		mysql_free_result ( $result );
-		mysql_close ();
 		return $array;
 	}
 }
