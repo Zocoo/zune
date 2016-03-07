@@ -24,8 +24,9 @@ class userdao {
 		) );
 		$rs = $pdo->query ( "select * from user" );
 		$array = array ();
-		while ( $row = $rs->fetch () ) {
+		while ( $row = $rs->fetch(PDO::FETCH_ASSOC)) {
 			$array [] = $row;
+			//var_dump ( $row );
 		}
 		return $array;
 	}

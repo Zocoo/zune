@@ -79,9 +79,16 @@ switch ($func) {
 		remsg ( 0, "未知错误，估计是func参数错误" );
 		break;
 }
-// echo file_get_contents ( "php://input" );
-// $json_string = file_get_contents ( "php://input" );
-// $d = new Data ();
-// $d = json_decode ( $json_string );
-// $arr = $d->data;
+$json_string = file_get_contents ( "php://input" );
+// echo $json_string . "==========>";
+$dddd = json_decode ( $json_string );
+$datad = new data ();
+$datad->setData ( $dddd->data );
+var_dump ( $datad->getData () );
+// for($i=0;$i<count( $dddd['data']);++$i){
+// echo var_dump ( $dddd['data'][$i] );
+// }
+// $d = json_decode ( $json_string, true );
+// echo $d ['data'];
+// var_dump ( $d );
 ?>
