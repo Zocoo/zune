@@ -5,9 +5,9 @@ class user {
 	var $age;
 	var $address;
 	var $sex;
-	var $passwrod;
+	var $password;
 	function setPassword($password) {
-		$this->passwrod = $password;
+		$this->password = $password;
 	}
 	function setId($id) {
 		$this->id = $id;
@@ -24,8 +24,8 @@ class user {
 	function setSex($age) {
 		$this->sex = $age;
 	}
-	function getPassword($password) {
-		return $this->passwrod;
+	function getPassword() {
+		return $this->password;
 	}
 	function getId() {
 		return $this->id;
