@@ -1,4 +1,5 @@
 <?php
+session_start ();
 include '../pojo/data.php';
 include '../pojo/msg.php';
 function arrayRecursive(&$array, $function, $apply_to_keys_also = false) {
@@ -30,6 +31,10 @@ function remsg($code, $msg) {
 	$data = new Data ();
 	$data->setData ( $msgs );
 	$data->setMd5 ( md5 ( urldecode ( json_encode ( $msgs ) ) ) );
+	if (! empty ( $_SESSION ['token'] )) {
+		$_SESSION ['token'] = md5 ( time () );
+		$data->setToken ( $_SESSION ['token'] );
+	}
 	echo urldecode ( json_encode ( $data ) );
 }
 function rearr($array) {
@@ -37,6 +42,8 @@ function rearr($array) {
 	$data = new Data ();
 	$data->setData ( $array );
 	$data->setMd5 ( md5 ( urldecode ( json_encode ( $array ) ) ) );
+	$_SESSION ['token'] = md5 ( time () );
+	$data->setToken ( $_SESSION ['token'] );
 	echo urldecode ( json_encode ( $data ) );
 }
 ?>

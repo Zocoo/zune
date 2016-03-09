@@ -1,4 +1,5 @@
 <?php
+session_start ();
 include '../dao/userdao.php';
 include '../util/json.php';
 class useraction {
@@ -38,15 +39,36 @@ class useraction {
 		$u->setPassword ( $password );
 		$code = $ud->login ( $u );
 		if ($code == 1) {
+			$_SESSION ['token'] = md5 ( time () );
 			remsg ( 1, "success" );
 		} else {
-			remsg ( 0, "登陆失败!" );
+			session_destroy ();
+			remsg ( 0, "账户名或密码错误!" );
 		}
 	}
 }
 $func = $_SERVER ['PATH_INFO'];
 $arr = explode ( "/", $func );
 $func = $arr [1];
+if (0 == 0) {
+	if (empty ( $func )) {
+		exit ( '数据错误' );
+	} else if ($func != 'login') {
+		if (empty ( $_SESSION ['token'] )) {
+			exit ( '你没有登陆或者token过期了' );
+		} else {
+			if (! empty ( $_GET ["token"] )) {
+				if ($_GET ["token"] != $_SESSION ['token']) {
+					exit ( '无效的token' );
+				} else {
+					// $_SESSION ['token'] = md5 ( time () );
+				}
+			} else {
+				exit ( '请带上你的token' );
+			}
+		}
+	}
+}
 $ua = new useraction ();
 if (! empty ( $_GET ["password"] )) {
 	$password = $_GET ["password"];
