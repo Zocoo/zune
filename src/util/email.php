@@ -1,9 +1,14 @@
 <?php
 include 'sendmail.php';
-$sendmail = new sendmail ();
-$mail = new mail ();
-$mail->setSmtpemailto ( "815769472@qq.com" );
-$mail->setMailsubject ( "phpemail" );
-$mail->setMailbody ( "today is a good day" );
-$sendmail->send ( $mail );
+class email {
+	function send($email, $code) {
+		$sendmail = new sendmail ();
+		$mail = new mail ();
+		$mail->setSmtpemailto ( $email );
+		$mail->setMailsubject ( "邮箱验证" );
+		$mail->setMailbody ( "感谢你的支持，你的验证码为：" . $code );
+		$rs = $sendmail->send ( $mail );
+		return $rs;
+	}
+}
 ?>

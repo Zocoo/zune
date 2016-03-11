@@ -1,3 +1,4 @@
+var token;
 document.onkeydown = function(event) {
 	var e = event || window.event || arguments.callee.caller.arguments[0];
 	if (e && e.keyCode == 13) { // enter 键
@@ -6,8 +7,8 @@ document.onkeydown = function(event) {
 	}
 };
 function login() {
-	var ur = eval(document.getElementById('ur')).value
-	var psd = eval(document.getElementById('psd')).value
+	var ur = eval(document.getElementById('ur')).value;
+	var psd = eval(document.getElementById('psd')).value;
 	$.ajax({
 		type : 'get',
 		url : '../../../src/action/useraction.php/login',
@@ -16,7 +17,7 @@ function login() {
 			'name' : ur,
 			'password' : psd
 		},
-		timeout : '10000',// 10时
+		timeout : '10000',// 10秒超时
 		dataType : 'json',
 		success : function(html) {
 			if (html) {

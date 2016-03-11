@@ -47,7 +47,7 @@ class smtp {
 		$header .= "X-Mailer:By Redhat (PHP/" . phpversion () . ")\r\n";
 		list ( $msec, $sec ) = explode ( " ", microtime () );
 		$header .= "Message-ID: <" . date ( "YmdHis", $sec ) . "." . ($msec * 1000000) . "." . $mail_from . ">\r\n";
-		echo "==============>" . $header;
+		//echo "==============>" . $header;
 		$TO = explode ( ",", $this->strip_comment ( $to ) );
 		
 		if ($cc != "") {
@@ -217,7 +217,7 @@ class smtp {
 	}
 	function smtp_debug($message) {
 		if ($this->debug) {
-			echo $message;
+			//echo $message;
 		}
 	}
 }

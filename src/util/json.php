@@ -24,12 +24,21 @@ function arrayRecursive(&$array, $function, $apply_to_keys_also = false) {
 	$recursive_counter --;
 }
 function remsg($code, $msg) {
-	$msg = urldecode ( $msg );
 	$msgs = new msgs ();
 	$msgs->setCode ( $code );
 	$msgs->setMsg ( urlencode ( $msg ) );
 	$data = new Data ();
 	$data->setData ( $msgs );
+	$data->setMd5 ( md5 ( urldecode ( json_encode ( $msgs ) ) ) );
+	if (! empty ( $_SESSION ['token'] )) {
+		$_SESSION ['token'] = md5 ( time () );
+		$data->setToken ( $_SESSION ['token'] );
+	}
+	echo urldecode ( json_encode ( $data ) );
+}
+function reobj($msg) {
+	$data = new Data ();
+	$data->setData ( $msg );
 	$data->setMd5 ( md5 ( urldecode ( json_encode ( $msgs ) ) ) );
 	if (! empty ( $_SESSION ['token'] )) {
 		$_SESSION ['token'] = md5 ( time () );

@@ -15,7 +15,8 @@ class sendmail {
 		$smtp = new smtp ( $smtpserver, $smtpserverport, true, $smtpuser, $smtppass ); // 这里面的一个true是表示使用身份验证,否则不使用身份验证.
 		$smtp->debug = TRUE; // 是否显示发送的调试信息
 		                     // echo "===" . $mail->getSmtpemailto ();
-		$smtp->sendmail ( $smtpemailto, $smtpusermail, $mailsubject, $mailbody, $mailtype );
+		$rs = $smtp->sendmail ( $smtpemailto, $smtpusermail, $mailsubject, $mailbody, $mailtype );
+		return $rs;
 	}
 }
 ?>
