@@ -19,15 +19,17 @@ function sendemail() {
 					} else {
 						if (html.data.id) {
 							userid = html.data.id;
+							sweetAlert("邮件发送成功！", "Amazing!", "success");
 						} else {
-							sweetAlert("unknown error",
-									"Something went wrong!", "error");
+							sweetAlert("邮件发送失败！", "Something went wrong!",
+									"error");
 						}
 					}
 				}
 			}
 		},
 		error : function() {
+			sweetAlert("you mama boom", "Something went wrong!", "error");
 		}
 	});
 }
@@ -52,7 +54,7 @@ function add() {
 				if (html) {
 					if (html.data) {
 						if (html.data.code == 1) {
-							location.href = "http://www.baidu.com";// location.href实现客户端页面的跳转
+							location.href = "index.html";// location.href实现客户端页面的跳转
 						} else {
 							sweetAlert(html.data.msg, "Something went wrong!",
 									"error");
@@ -61,6 +63,7 @@ function add() {
 				}
 			},
 			error : function() {
+				sweetAlert("you mama boom", "Something went wrong!", "error");
 			}
 		});
 	} else {

@@ -6,7 +6,7 @@ class userdao {
 		$pdo = new PDO ( 'mysql:host=' . $mysql_server_name . ';port=' . $mysql_port . ';dbname=' . $mysql_database, $mysql_username, $mysql_password, array (
 				PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8" 
 		) );
-		$str = "select * from user where `name` ='" . $u->getName () . "' and `password`='" . $u->getPassword () . "'";
+		$str = "select * from user where `email` ='" . $u->getEmail () . "' and `password`='" . $u->getPassword () . "'";
 		$rs = $pdo->query ( $str );
 		$array = array ();
 		while ( $row = $rs->fetch ( PDO::FETCH_ASSOC ) ) {
@@ -63,7 +63,8 @@ class userdao {
 		$pdo = new PDO ( 'mysql:host=' . $mysql_server_name . ';port=' . $mysql_port . ';dbname=' . $mysql_database, $mysql_username, $mysql_password, array (
 				PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8" 
 		) );
-		$res = $pdo->exec ( "updae user set `name`='" . $u->getName () . "',`phone`='" . $u->getPhone () . "',`email`='" . $u->getEmail () . "',`address`='" . $u->getAddress () . "',`password`='" . $u->getPassword () . "',`sex`='" . $u->getSex () . "',`age`='" . $u->getAge () . "',`code`='" . $u->getCode () . "',`updatedate`='" . $u->getUpdatedate () . "' where id=" . $u->getId () );
+		$sql = "update `user` set `name`='" . $u->getName () . "',`phone`='" . $u->getPhone () . "',`email`='" . $u->getEmail () . "',`address`='" . $u->getAddress () . "',`password`='" . $u->getPassword () . "',`sex`='" . $u->getSex () . "',`age`='" . $u->getAge () . "',`code`='" . $u->getCode () . "',`updatedate`='" . $u->getUpdatedate () . "' where id=" . $u->getId ();
+		$res = $pdo->exec ( $sql );
 		return $res;
 	}
 }

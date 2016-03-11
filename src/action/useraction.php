@@ -1,4 +1,5 @@
 <?php
+error_reporting ( E_ALL & ~ E_NOTICE );
 include '../dao/userdao.php';
 include '../util/json.php';
 include '../util/email.php';
@@ -39,11 +40,11 @@ class useraction {
 		$user = new user ();
 		if (count ( $un ) == 1) {
 			$user = ( object ) $un [0];
-			var_dump ( $user );
-			if ($user->code == $code) {
-				$user->setPassword ( $password );
-				remsg ( 1, "success" );
-				$res = $ud->update ( $user );
+			$u = setUser ( $user );
+			if ($u->getCode () == $code) {
+				$u->setPassword ( $password );
+				$u->setUpdatedate ( time () );
+				$res = $ud->update ( $u );
 				if ($res > 0) {
 					remsg ( 1, "success" );
 				} else {
@@ -61,10 +62,10 @@ class useraction {
 		$array = $ud->select ();
 		rearr ( $array );
 	}
-	function login($name, $password) { // 登陆
+	function login($email, $password) { // 登陆
 		$ud = new userdao ();
 		$u = new user ();
-		$u->setName ( $name );
+		$u->setEmail ( $email );
 		$u->setPassword ( $password );
 		$code = $ud->login ( $u );
 		if ($code == 1) {
@@ -95,6 +96,8 @@ if (0 == 0) {
 			}
 		}
 	}
+} else if (o == o) {
+	exit ( '服务器故障，暂停服务！！！' );
 }
 $ua = new useraction ();
 if (! empty ( $_GET ["email"] )) {
@@ -128,17 +131,16 @@ if (! empty ( $_GET ["sex"] )) {
 switch ($func) {
 	case 'cheak' :
 		if (empty ( $code ) || empty ( $password ) || empty ( $id )) {
-			echo "------------->" . $id;
 			remsg ( 0, "0验证失败！" );
 		} else {
 			$ua->cheak ( $code, $password, $id );
 		}
 		break;
 	case 'login' :
-		if (empty ( $name ) || empty ( $password )) {
+		if (empty ( $email ) || empty ( $password )) {
 			remsg ( 0, "请填入用户名和密码！" );
 		} else {
-			$ua->login ( $name, $password );
+			$ua->login ( $email, $password );
 		}
 		break;
 	case 'selectuser' :
@@ -148,7 +150,7 @@ switch ($func) {
 		if (! empty ( $email )) {
 			$ua->adduser ( $email, $name, $age, $address, $sex, $password );
 		} else {
-			remsg ( 0, "未知错误，估计是name,address参数错误" );
+			remsg ( 0, "估计是没有填写邮箱！" );
 		}
 		break;
 	case 'deleteuser' :

@@ -85,4 +85,20 @@ class User {
 		return $this->dr;
 	}
 }
+function setUser($user) {
+	$userw = new User ();
+	$userw->setId ( $user->id );
+	$userw->setName ( $user->name );
+	$userw->setPhone ( $user->phone );
+	$userw->setEmail ( $user->email );
+	$userw->setAddress ( $user->address );
+	$userw->setPassword ( $user->password );
+	$userw->setSex ( $user->sex );
+	$userw->setAge ( $user->age );
+	$userw->setCode ( $user->code );
+	$userw->setCreatedate ( $user->createdate );
+	$userw->setUpdatedate ( $user->updatedate );
+	$userw->setDr ( $user->dr );
+	return $userw;
+}
 ?>

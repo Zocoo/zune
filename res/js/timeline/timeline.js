@@ -2,8 +2,7 @@
 	$(document)
 			.ready(
 					function() {
-						document.getElementById("timeline_id").innerHTML = ""
-								+ "<div class='timeline-row'>"
+						var str = "<div class='timeline-row'>"
 								+ "<div class='timeline-time'>"
 								+ "<small>Oct 16</small>9:00 AM</div>"
 								+ "<div class='timeline-icon'>"
@@ -15,7 +14,9 @@
 								+ "<p>Sed pretium, ligula sollicitudin laoreet"
 								+ " viverra, tortor libero sodales leo, eget"
 								+ " blandit nunc tortor eu nibh. Nullam mollis. "
-								+ "Ut justo. Suspendisse potenti.</p></div></div>";
+								+ "Ut justo. Suspendisse potenti.</p></div></div></div>\n";
+						str = str + str + str;
+						document.getElementById("timeline_id").innerHTML = str;
 						var timelineAnimate;
 						timelineAnimate = function(elem) {
 							return $(".timeline.animated .timeline-row")

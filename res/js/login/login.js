@@ -14,7 +14,7 @@ function login() {
 		url : '../../../src/action/useraction.php/login',
 		cache : false,// 是否缓存
 		data : {
-			'name' : ur,
+			'email' : ur,
 			'password' : psd
 		},
 		timeout : '10000',// 10秒超时
@@ -32,6 +32,7 @@ function login() {
 			}
 		},
 		error : function() {
+			sweetAlert("you mama boom", "Something went wrong!", "error");
 		}
 	});
 }
